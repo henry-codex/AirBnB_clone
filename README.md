@@ -43,12 +43,12 @@ Here are some usage examples for the commands:
 - To show all objects: `all`
 - To show all objects of a specific class, e.g., Review: `all Review`
 - To count the number of User instances: `count User`
-- To update the name attribute of a User object with id "abc123": `update User abc123 name "John Doe"`
-- To update multiple User objects with the same attribute and value: `batch_update User name="John Doe" active=True`
+- To update the name attribute of a User object with id "abc123": `update User abc123 name "John Mensah"`
+- To update multiple User objects with the same attribute and value: `batch_update User name="John Mensah" active=True`
 - To delete all User objects: `batch_delete User`
 - To count the number of instances of User and Place classes: `batch_count User Place`
 - To show all User objects: `batch_show User`
-- To search for Place objects with attribute `city` having the value "New York": `search Place city "New York"`
+- To search for Place objects with attribute `city` having the value "Accra": `search Place city "Accra"`
 
 ## Exiting the Console
 
