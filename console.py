@@ -240,7 +240,8 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if len(args) < 4:
             print("** missing arguments **")
-            print("Usage: batch_update <className> <key=value> <key=value> ...")
+            print("Usage: batch_update <className> <key=value> "
+                  "<key=value> ...")
             return
 
         class_name = args[0]
@@ -254,7 +255,8 @@ class HBNBCommand(cmd.Cmd):
         for pair in args[1:]:
             if '=' not in pair:
                 print("** invalid argument format **")
-                print("Usage: batch_update <className> <key=value> <key=value> ...")
+                print("Usage: batch_update <className> <key=value> "
+                      "<key=value> ...")
                 return
             attr, value = pair.split('=')
             if attr not in class_attrs:
@@ -401,4 +403,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
-
