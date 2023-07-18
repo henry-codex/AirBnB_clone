@@ -165,8 +165,7 @@ class HBNBCommand(cmd.Cmd):
             objects = list(storage.all().values())
         elif arg in self.classes:
             class_name = arg
-            objects = [v for k, v in storage.all().items()
-                       if k.split('.')[0] == class_name]
+            objects = self.classes[class_name].all()
         else:
             print("** class doesn't exist **")
             return
@@ -182,8 +181,7 @@ class HBNBCommand(cmd.Cmd):
         """Count the number of instances of a class"""
         if arg in self.classes:
             class_name = arg
-            count = sum(1 for k in storage.all()
-                        if k.split('.')[0] == class_name)
+            count = self.classes[class_name].count()
             print(count)
         else:
             print("** class doesn't exist **")
@@ -240,7 +238,8 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if len(args) < 4:
             print("** missing arguments **")
-            print("Usage: batch_update <className> <key=value> <key=value> ...")
+            print("Usage: batch_update <className> <key=value> "
+                  "<key=value> ...")
             return
 
         class_name = args[0]
@@ -254,7 +253,8 @@ class HBNBCommand(cmd.Cmd):
         for pair in args[1:]:
             if '=' not in pair:
                 print("** invalid argument format **")
-                print("Usage: batch_update <className> <key=value> <key=value> ...")
+                print("Usage: batch_update <className> <key=value> "
+                      "<key=value> ...")
                 return
             attr, value = pair.split('=')
             if attr not in class_attrs:
@@ -262,8 +262,7 @@ class HBNBCommand(cmd.Cmd):
                 return
             kwargs[attr] = value
 
-        objs = [obj for key, obj in storage.all().items()
-                if key.split('.')[0] == class_name]
+        objs = self.classes[class_name].all()
         for obj in objs:
             for attr, value in kwargs.items():
                 setattr(obj, attr, value)
@@ -286,8 +285,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        objs = [obj for key, obj in storage.all().items()
-                if key.split('.')[0] == class_name]
+        objs = self.classes[class_name].all()
         for obj in objs:
             key = class_name + '.' + obj.id
             del storage.all()[key]
@@ -308,8 +306,7 @@ class HBNBCommand(cmd.Cmd):
         counts = {}
         for class_name in args:
             if class_name in self.classes:
-                count = sum(1 for k, v in storage.all().items()
-                            if k.split('.')[0] == class_name)
+                count = self.classes[class_name].count()
                 counts[class_name] = count
             else:
                 print(f"** {class_name} class doesn't exist **")
@@ -334,8 +331,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        objs = [v for k, v in storage.all().items()
-                if k.split('.')[0] == class_name]
+        objs = self.classes[class_name].all()
         print(objs)
 
     def help_batch_show(self):
